@@ -1,3 +1,15 @@
+//***********************************************************************************************
+// File Name: SplashScreen
+// Authors: Christopher Farfan (101067074) & Esaac Ahn (100836038)
+// Date: March 11th, 2018
+// Assignment 1 submission.
+//
+// Description:
+// Splash screen that loads the Play Screen after 4 seconds
+//
+//  Revision History:
+//  Can be found on https://github.com/bluCraze/SlotMachine/commits/master
+//***********************************************************************************************
 package com.example.esaacahn.slotmachine;
 
 import android.app.Activity;
@@ -13,7 +25,6 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        //final View myLayout = findViewById(R.id.startscreen);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -1,3 +1,16 @@
+//***********************************************************************************************
+// File Name: PlayScreen
+// Authors: Christopher Farfan (101067074) & Esaac Ahn (100836038)
+// Date: March 11th, 2018
+// Assignment 1 submission.
+//
+// Description:
+// A simple slots machine game using fake money, user can win depending on what shows up
+//
+//  Revision History:
+//  Can be found on https://github.com/bluCraze/SlotMachine/commits/master
+//***********************************************************************************************
+
 package com.example.esaacahn.slotmachine;
 
 import android.app.Activity;
@@ -26,6 +39,7 @@ public class PlayScreen extends Activity {
     private float winNumber = 0;
     private float lossNumber = 0;
     private float winRatio = 0;
+    private boolean betHasBeenMade = false;
 
 
     private int blanks = 0;
@@ -61,6 +75,15 @@ public class PlayScreen extends Activity {
         winNumber = 0;
         lossNumber = 0;
         winRatio = 0;
+
+        playerMoneyTV.setText("$" + playerMoney);
+        winNumberTV.setText((int)winNumber + "");
+        winningsTV.setText(winnings + "");
+        lossNumberTV.setText((int)lossNumber + "");
+        String formattedWinRatio = String.format("%.02f", winRatio);
+        winRatioTV.setText(formattedWinRatio + "%");
+        turnTV.setText(turn + "");
+        jackpotTV.setText("$5000");
     }
 
     /* Check to see if the player won the jackpot */
@@ -69,7 +92,7 @@ public class PlayScreen extends Activity {
         int jackPotTry = (int)Math.floor((Math.random() * 51) + 1);
         int jackPotWin = (int)Math.floor((Math.random() * 51) + 1);
         if (jackPotTry == jackPotWin) {
-            //alert("You Won the $" + jackpot + " Jackpot!!");
+            messageBoardTV.setText("You won the $" + jackpot + "Jackpot!");
             playerMoney += jackpot;
             jackpot = 1000;
         }
@@ -82,7 +105,7 @@ public class PlayScreen extends Activity {
         winRatio = (winNumber / turn) * 100;
         String formattedWinRatio = String.format("%.02f", winRatio);
         playerMoney += winnings;
-        playerMoneyTV.setText(playerMoney + "");
+        playerMoneyTV.setText("$" + playerMoney + "");
         winNumberTV.setText((int)winNumber + "");
         winningsTV.setText(winnings + "");
         messageBoardTV.setText("You Won: $" + winnings + "!");
@@ -96,8 +119,6 @@ public class PlayScreen extends Activity {
         lossNumber++;
         winRatio = (winNumber / turn) * 100;
         String formattedWinRatio = String.format("%.02f", winRatio);
-        playerMoney -= playerBet;
-        playerMoneyTV.setText(playerMoney + "");
         lossNumberTV.setText((int)lossNumber + "");
         messageBoardTV.setText("You Lost, Better Luck Next Time!");
         winRatioTV.setText(formattedWinRatio + "%");
@@ -140,7 +161,7 @@ public class PlayScreen extends Activity {
 
 
     }
-
+    //Determines how much money the player has won. Taken from the example professor provided.
     public void determineWinnings(){
         turn++;
         turnTV.setText(turn + "");
@@ -203,16 +224,54 @@ public class PlayScreen extends Activity {
 
     }
 
+    //Runs function when reset button is clicked
+    public void resetButtonOnClick(View view){
+        resetAll();
+        messageBoardTV.setText("Game has been reset, good luck!");
+    }
+    //Runs when single button is clicked
+    public void singleButtonOnClick(View view){
+        if (playerMoney >= 50 && !betHasBeenMade){
+            betHasBeenMade = true;
+            playerBet = 50;
+            playerMoney -= playerBet;
+            playerMoneyTV.setText("$"+ playerMoney + "");
+            messageBoardTV.setText("A single bet of $50 has been placed.");
+        } else if (betHasBeenMade){
+            messageBoardTV.setText("A bet has already been placed.");
+        } else
+            messageBoardTV.setText("Sorry you don't have enough cash.");
+
+    }
+    //Runs when max button is clicked
+    public void maxButtonOnClick(View view){
+        if (playerMoney >= 500) {
+            betHasBeenMade = true;
+            playerBet = 500;
+            playerMoney -= playerBet;
+            messageBoardTV.setText("A max bet of $500 has been placed.");
+            playerMoneyTV.setText("$"+ playerMoney + "");
+        } else if (betHasBeenMade){
+            messageBoardTV.setText("A bet has already been placed.");
+        } else
+            messageBoardTV.setText("Sorry you don't have enough cash.");
+    }
+
+    //Runs function when spin button is clicked
+    public void spinButtonOnClick(View view){
+        //Button button = (Button) view;
+
+        if (betHasBeenMade){
+            Spin(leftImage);
+            Spin(middleImage);
+            Spin(rightImage);
+            determineWinnings();
+            betHasBeenMade = false;
+        }else{
+            messageBoardTV.setText("A bet has not been placed. Please place a bet.");
+        }
 
 
-    //Runs function when button is clicked
-    public void buttonOnClick(View view){
-        Button button = (Button) view;
-
-        Spin(leftImage);
-        Spin(middleImage);
-        Spin(rightImage);
-        determineWinnings();
 
     }
 
