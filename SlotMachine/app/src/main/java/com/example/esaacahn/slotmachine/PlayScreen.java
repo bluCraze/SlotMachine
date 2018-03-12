@@ -108,7 +108,7 @@ public class PlayScreen extends Activity {
         playerMoney += winnings;
         playerMoneyTV.setText("$" + playerMoney + "");
         winNumberTV.setText((int)winNumber + "");
-        winningsTV.setText(winnings + "");
+        winningsTV.setText("$" + winnings + "");
         messageBoardTV.setText("You Won: $" + winnings + "!");
         winRatioTV.setText(formattedWinRatio + "%");
         resetFruitTally();
