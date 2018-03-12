@@ -92,9 +92,10 @@ public class PlayScreen extends Activity {
         int jackPotTry = (int)Math.floor((Math.random() * 51) + 1);
         int jackPotWin = (int)Math.floor((Math.random() * 51) + 1);
         if (jackPotTry == jackPotWin) {
-            messageBoardTV.setText("You won the $" + jackpot + "Jackpot!");
+            messageBoardTV.setText("You won the $" + jackpot + " Jackpot!");
             playerMoney += jackpot;
             jackpot = 1000;
+            jackpotTV.setText("$" + jackpot + "");
         }
 
     }
@@ -124,7 +125,7 @@ public class PlayScreen extends Activity {
         winRatioTV.setText(formattedWinRatio + "%");
         resetFruitTally();
         jackpot += (playerBet / 10);
-        jackpotTV.setText(jackpot + "");
+        jackpotTV.setText("$" + jackpot + "");
     }
 
 
