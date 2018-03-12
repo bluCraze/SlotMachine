@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class PlayScreen extends Activity {
 
@@ -12,14 +15,18 @@ public class PlayScreen extends Activity {
 
     public ImageView leftImage, middleImage, rightImage;
 
+    public TextView playerMoneyTV, winningsTV, jackpotTV, turnTV, winNumberTV, lossNumberTV, messageBoardTV, winRatioTV;
+
 
     private int playerMoney = 1000;
     private int winnings = 0;
     private int jackpot = 5000;
     private int turn = 0;
     private int playerBet = 50;
-    private int winNumber = 0;
-    private int lossNumber = 0;
+    private float winNumber = 0;
+    private float lossNumber = 0;
+    private float winRatio = 0;
+
 
     private int blanks = 0;
     private int apples = 0;
@@ -53,6 +60,7 @@ public class PlayScreen extends Activity {
         playerBet = 0;
         winNumber = 0;
         lossNumber = 0;
+        winRatio = 0;
     }
 
     /* Check to see if the player won the jackpot */
@@ -70,25 +78,38 @@ public class PlayScreen extends Activity {
 
     /* Utility function to show a win message and increase player money */
     public void showWinMessage() {
+        winNumber++;
+        winRatio = (winNumber / turn) * 100;
+        String formattedWinRatio = String.format("%.02f", winRatio);
         playerMoney += winnings;
-       // $("div#winOrLose>p").text("You Won: $" + winnings);
+        playerMoneyTV.setText(playerMoney + "");
+        winNumberTV.setText((int)winNumber + "");
+        winningsTV.setText(winnings + "");
+        messageBoardTV.setText("You Won: $" + winnings + "!");
+        winRatioTV.setText(formattedWinRatio + "%");
         resetFruitTally();
         checkJackpot();
     }
 
     /* Utility function to show a loss message and reduce player money */
     public void showLossMessage() {
+        lossNumber++;
+        winRatio = (winNumber / turn) * 100;
+        String formattedWinRatio = String.format("%.02f", winRatio);
         playerMoney -= playerBet;
-       // $("div#winOrLose>p").text("You Lost!");
+        playerMoneyTV.setText(playerMoney + "");
+        lossNumberTV.setText((int)lossNumber + "");
+        messageBoardTV.setText("You Lost, Better Luck Next Time!");
+        winRatioTV.setText(formattedWinRatio + "%");
         resetFruitTally();
         jackpot += (playerBet / 10);
+        jackpotTV.setText(jackpot + "");
     }
 
 
 
     //The main game function, determines what each column will be
     private void Spin(ImageView image){
-
         //Generates a random number from 1 - 65 (inclusive)
         int randInt = (int) Math.floor((Math.random() * 65) + 1);
         if (randInt >= 1 && randInt <= 27){ // 41.5% probability
@@ -121,6 +142,8 @@ public class PlayScreen extends Activity {
     }
 
     public void determineWinnings(){
+        turn++;
+        turnTV.setText(turn + "");
         if (blanks == 0)
         {
             if (apples == 3) {
@@ -171,13 +194,11 @@ public class PlayScreen extends Activity {
             else {
                 winnings = playerBet * 1;
             }
-            winNumber++;
-            //showWinMessage();
+            showWinMessage();
         }
         else
         {
-            lossNumber++;
-            //showLossMessage();
+            showLossMessage();
         }
 
     }
@@ -209,6 +230,17 @@ public class PlayScreen extends Activity {
         middleImage.setImageResource(slotImages[0]);
         rightImage = findViewById(R.id.slotImg3);
         rightImage.setImageResource(slotImages[0]);
+
+
+        playerMoneyTV = findViewById(R.id.playerMoney);
+        winningsTV = findViewById(R.id.lastWinAmount);
+        jackpotTV = findViewById(R.id.jackPot);
+        turnTV = findViewById(R.id.playerTurn);
+        winNumberTV = findViewById(R.id.playerWins);
+        lossNumberTV = findViewById(R.id.playerLosses);
+        messageBoardTV = findViewById(R.id.playerMessageBoard);
+        winRatioTV = findViewById(R.id.playerWinRatio);
+
     }
 
 
