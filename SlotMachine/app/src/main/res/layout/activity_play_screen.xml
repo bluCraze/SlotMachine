@@ -10,11 +10,12 @@
     <Button
         android:id="@+id/resetButton"
         android:layout_width="67dp"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:onClick="resetButtonOnClick"
         android:text="Reset"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.097"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.955" />
+        app:layout_constraintVertical_bias="0.954" />
 
     <Button
         android:id="@+id/singleButton"
@@ -39,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.343"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintVertical_bias="0.952" />
 
     <Button
         android:id="@+id/maxButton"
@@ -56,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintVertical_bias="0.953" />
 
     <Button
         android:id="@+id/spinButton"
@@ -66,6 +67,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/holo_red_light"
         android:onClick="spinButtonOnClick"
         android:text="Spin"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,8 +127,8 @@
 
     <TextView
         android:id="@+id/playerMessageBoard"
-        android:layout_width="230dp"
-        android:layout_height="64dp"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -134,53 +136,50 @@
         android:text="LET'S PLAY!"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.602" />
 
     <TextView
         android:id="@+id/lastWinAmount"
-        android:layout_width="84dp"
-        android:layout_height="43dp"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="$0"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.318"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/jackPotText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/playerLastWinText"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <TextView
         android:id="@+id/jackPotText"
-        android:layout_width="150dp"
-        android:layout_height="41dp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="serif"
-        android:text="Jack Pot: "
-        android:textAlignment="center"
+        android:text="Jackpot: "
+        android:textAlignment="textEnd"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.751"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/jackPot"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <TextView
         android:id="@+id/playerMoney"
@@ -359,42 +358,40 @@
 
     <TextView
         android:id="@+id/playerLastWinText"
-        android:layout_width="125dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="268dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="serif"
         android:text="Last Win: "
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <TextView
         android:id="@+id/jackPot"
-        android:layout_width="98dp"
-        android:layout_height="34dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginTop="8dp"
         android:text="$5000"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.34" />
 
 </android.support.constraint.ConstraintLayout>

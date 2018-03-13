@@ -75,10 +75,11 @@ public class PlayScreen extends Activity {
         winNumber = 0;
         lossNumber = 0;
         winRatio = 0;
+        betHasBeenMade = false;
 
         playerMoneyTV.setText("$" + playerMoney);
         winNumberTV.setText((int)winNumber + "");
-        winningsTV.setText(winnings + "");
+        winningsTV.setText("$" + winnings + "");
         lossNumberTV.setText((int)lossNumber + "");
         String formattedWinRatio = String.format("%.02f", winRatio);
         winRatioTV.setText(formattedWinRatio + "%");
@@ -92,7 +93,8 @@ public class PlayScreen extends Activity {
         int jackPotTry = (int)Math.floor((Math.random() * 51) + 1);
         int jackPotWin = (int)Math.floor((Math.random() * 51) + 1);
         if (jackPotTry == jackPotWin) {
-            messageBoardTV.setText("You won the $" + jackpot + " Jackpot!");
+            messageBoardTV.setText("You won the $" + (jackpot + winnings) + " Jackpot!");
+            winningsTV.setText("$" + (winnings + jackpot) + "");
             playerMoney += jackpot;
             jackpot = 1000;
             jackpotTV.setText("$" + jackpot + "");
@@ -225,12 +227,12 @@ public class PlayScreen extends Activity {
 
     }
 
-    //Runs function when reset button is clicked
+    //Runs function when reset button is clicked, resets all variables to start a new game
     public void resetButtonOnClick(View view){
         resetAll();
         messageBoardTV.setText("Game has been reset, good luck!");
     }
-    //Runs when single button is clicked
+    //Runs when single button is clicked, places a single bet if one has not been placed (only if user has enough money)
     public void singleButtonOnClick(View view){
         if (playerMoney >= 50 && !betHasBeenMade){
             betHasBeenMade = true;
@@ -244,9 +246,9 @@ public class PlayScreen extends Activity {
             messageBoardTV.setText("Sorry you don't have enough cash.");
 
     }
-    //Runs when max button is clicked
+    //Runs when max button is clicked, places a single bet if one has not been placed (only if user has enough money)
     public void maxButtonOnClick(View view){
-        if (playerMoney >= 500) {
+        if (playerMoney >= 500 && !betHasBeenMade) {
             betHasBeenMade = true;
             playerBet = 500;
             playerMoney -= playerBet;
@@ -258,7 +260,7 @@ public class PlayScreen extends Activity {
             messageBoardTV.setText("Sorry you don't have enough cash.");
     }
 
-    //Runs function when spin button is clicked
+    //Runs function when spin button is clicked, changes the images on the slot machine
     public void spinButtonOnClick(View view){
         //Button button = (Button) view;
 
@@ -269,7 +271,7 @@ public class PlayScreen extends Activity {
             determineWinnings();
             betHasBeenMade = false;
         }else{
-            messageBoardTV.setText("A bet has not been placed. Please place a bet.");
+            messageBoardTV.setText("A bet has not been placed.");
         }
 
 
@@ -277,7 +279,7 @@ public class PlayScreen extends Activity {
     }
 
 
-
+    //Links variables to elements in the xml layout
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
